@@ -1,0 +1,11 @@
+
+
+<script>
+
+	tabella = document.getElementById('table');
+	
+	tabella.innerHTML += "<tr><td>"+myvar+"</td></tr>";
+
+</script>
+
+
