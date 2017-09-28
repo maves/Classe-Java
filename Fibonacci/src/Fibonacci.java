@@ -8,6 +8,7 @@ public class Fibonacci {
 		
 		penultimo = 1;
 		ultimo = 1;
+		ultimo = 1;
 		
 		while (ultimo < limite) {
 			System.out.println(ultimo);
