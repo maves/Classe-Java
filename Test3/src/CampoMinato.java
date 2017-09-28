@@ -93,7 +93,8 @@ public class CampoMinato extends JPanel
         	
         	// inizio button
         	
-        	campi[i].button = new JButton(""+i);
+//        	campi[i].button = new JButton(""+i);
+        	campi[i].button = new JButton("");
             //Use the default text position of CENTER, TRAILING (RIGHT).
 //        	app.setMnemonic(KeyEvent.VK_E);
         	campi[i].button.setActionCommand("enable");
@@ -137,7 +138,7 @@ public class CampoMinato extends JPanel
         	
         	// fine button
         	
-        	campi[i].minato = (Math.random()>0.5) ? true : false;
+        	campi[i].minato = (Math.random()>0.8) ? true : false;
 //        	if(i%2>0) campi[i].minato = true;
         	campi[i].id = i;
         	
@@ -183,7 +184,19 @@ public class CampoMinato extends JPanel
     		
     		int indice = c.id + indiciCampiLimitrofi[i];
     		
-    		if(indice < 0 || indice >= numXMines*numYMines) continue;
+    		
+    		
+    		if(indice < 0 || indice >= numXMines*numYMines) continue;   		
+    		
+    		
+    		// verifico se bordo sinistro, 0 già escluso
+    		if(indice % numXMines == 0) continue;
+    		// bordo superiore
+    		if(indice < numXMines) continue;
+    		// bordo destro
+    		if(indice % numXMines == numXMines-1) continue;
+    		// bordo inferiore già verificato da indice >= numXMines*numYMines
+    		
     		
     		Campo app = campi[indice];
     		
@@ -195,12 +208,98 @@ public class CampoMinato extends JPanel
     	return numMineVicino;
     }
     
+    public void scopri2(Campo c) {
+    	
+    	boolean[] campiVicini = new boolean[8];
+    	
+    	int mine = 0;
+    	int i2check = 0;
+    	
+    	int[] indiciCampiLimitrofi = {
+    			-numXMines-1,
+    			-numXMines,
+    			-numXMines+1,
+    			+1,
+    			+numXMines+1,
+    			+numXMines,
+    			+numXMines-1,
+    			-1
+    	};
+    	
+    	boolean alto = c.id != 0 && c.id%numXMines > 0;
+    	
+    	
+    	//alto sx
+    	if(alto && c.id > numXMines) {
+    		if(campi[c.id-numXMines-1].minato)
+    			campiVicini[0] = true;
+    		else
+    			scopri2(campi[c.id-numXMines-1]);
+    	}
+    	//alto 
+    	if(c.id > numXMines) {
+    		if(campi[c.id-numXMines].minato)
+    			campiVicini[1] = true;
+    	}
+    	//alto dx
+    	if(c.id > numXMines && (c.id+1) % numXMines != 0) {
+    		if(campi[c.id-numXMines+1].minato)
+    			campiVicini[2] = true;
+    	}
+    	//dx
+    	if( (c.id+1) % numXMines != 0) {
+    		if(campi[c.id+1].minato)
+    			campiVicini[3] = true;
+    	}
+    	//basso dx
+    	if( c.id < numXMines*numYMines  - numXMines && (c.id+1) % numXMines != 0) {
+    		if(campi[c.id+numXMines+1].minato)
+    			campiVicini[4] = true;
+    	}
+    	//basso 
+    	if( c.id < numXMines*numYMines - numXMines) {
+    		if(campi[c.id+numXMines].minato)
+    			campiVicini[5] = true;
+    	}
+    	//basso sx
+    	if( c.id < numXMines*numYMines - numXMines && c.id != 0 && c.id%numXMines > 0) {
+    		if(campi[c.id+numXMines-1].minato)
+    			campiVicini[6] = true;
+    	}
+    	//sx
+    	if( c.id != 0 && c.id%numXMines > 0) {
+    		if(campi[c.id-1].minato)
+    			campiVicini[7] = true;
+    	}
+    	
+    	for (int i = 0; i < campiVicini.length; i++) {
+			if(campiVicini[i]==true)
+				mine++;
+//			else {
+//System.out.println(c.id+indiciCampiLimitrofi[i]);
+//				scopri2(campi[c.id+indiciCampiLimitrofi[i]]);
+//				
+//			}
+		}
+    	
+    	c.button.setText(String.valueOf("["+mine+"]"));
+    	
+    	
+    	
+    }
+    
     public void scopri(Campo c) {
+    	
+    	
+    	
+    	
+    	
     	
     	System.out.print("> " + c.id + " ");
     	
     	if(c.minato) {
     		System.out.println(c.id + " già minato.");
+    		c.button.setEnabled(false);
     		return;
     	}
     	
@@ -213,8 +312,45 @@ public class CampoMinato extends JPanel
     	
     	
     	// cerco se ha mine vicino
+    	int numMineVicino = haMineIntorno(c);
     	
-    	int numMineVicino = 0;
+    	if(numMineVicino>0)
+    	{
+    		c.button.setText(String.valueOf("["+numMineVicino+"]"));
+    		return;
+    	}
+    	
+    	int[] indiciCampiLimitrofi = {
+    			-numXMines-1,
+    			-numXMines,
+    			-numXMines+1,
+    			+1,
+    			+numXMines+1,
+    			+numXMines,
+    			+numXMines-1,
+    			-1
+    	};
+    	
+    	for(int i=0; i<8; i++) {
+    		
+    		int indice = c.id + indiciCampiLimitrofi[i];
+    		if(indice < 0 || indice >= numXMines*numYMines) continue;		
+    		
+    		
+    		// verifico se bordo sinistro, 0 già escluso
+    		if(indice % numXMines == 0) continue;
+    		// bordo superiore
+    		if(indice < numXMines) continue;
+    		// bordo destro
+    		if(indice % numXMines == numXMines-1) continue;
+    		// bordo inferiore già verificato da indice >= numXMines*numYMines
+    		
+    		
+    		scopri(campi[indice]);
+    		
+    		
+    	}
+    	
     	
     	
     	
@@ -223,7 +359,8 @@ public class CampoMinato extends JPanel
     	
     	c.button.setText(String.valueOf("["+c.mineVicino+"]"));
     	System.out.println(c.id + "]");
-//    	c.button.setEnabled(false);
+    	
+    	c.button.setEnabled(false);
     }
     
     public void clickSx(Campo c) {
@@ -236,7 +373,7 @@ public class CampoMinato extends JPanel
     		return;
     	}else {
     		
-    		scopri(c);
+    		scopri2(c);
     		
     	}
 //    	c.button.setText(" ");
@@ -278,7 +415,7 @@ public class CampoMinato extends JPanel
 
         //Create and set up the window.
         JFrame frame = new JFrame("Campo Minato");
-        frame.setSize(500, 500);
+        frame.setSize(600, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.

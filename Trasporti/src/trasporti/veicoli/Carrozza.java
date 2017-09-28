@@ -13,6 +13,10 @@ public class Carrozza extends Veicolo implements VeicoloTerrestre, TrazioneAnima
 		// TODO Auto-generated constructor stub
 		this.numCavalli = numCavalli;
 	}
+	
+	protected int getNumCavalli() {
+		return numCavalli;
+	}
 
 	@Override
 	public String getTipoAnimale() {
