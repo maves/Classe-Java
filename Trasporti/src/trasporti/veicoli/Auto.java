@@ -1,5 +1,6 @@
 package trasporti.veicoli;
 
+import Persona.Persona;
 import trasporti.TrazioneMotore;
 import trasporti.Veicolo;
 import trasporti.VeicoloTerrestre;
@@ -8,7 +9,7 @@ public class Auto extends Veicolo implements VeicoloTerrestre, TrazioneMotore {
 
 	String tipoCarburante;
 	
-	public Auto(String propietario, int maxPosti, int maxVelocita, String tipoCarburante) {
+	public Auto(Persona propietario, int maxPosti, int maxVelocita, String tipoCarburante) {
 		super(propietario, maxPosti, maxVelocita);
 		// TODO Auto-generated constructor stub
 	}

@@ -1,12 +1,13 @@
 package trasporti.veicoli;
 
+import Persona.Persona;
 import trasporti.TrazioneAnimale;
 import trasporti.Veicolo;
 import trasporti.VeicoloTerrestre;
 
 public class Bicicletta extends Veicolo implements VeicoloTerrestre, TrazioneAnimale {
 
-	public Bicicletta(String propietario, int maxPosti, int maxVelocita) {
+	public Bicicletta(Persona propietario, int maxPosti, int maxVelocita) {
 		super(propietario, maxPosti, maxVelocita);
 		// TODO Auto-generated constructor stub
 	}

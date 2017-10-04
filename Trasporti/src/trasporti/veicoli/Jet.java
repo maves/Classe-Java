@@ -1,5 +1,6 @@
 package trasporti.veicoli;
 
+import Persona.Persona;
 import trasporti.TrazioneMotore;
 import trasporti.Veicolo;
 import trasporti.VeicoloAereo;
@@ -9,7 +10,7 @@ public class Jet extends Veicolo implements TrazioneMotore, VeicoloAereo {
 	
 	private int numTurbine;
 	
-	public Jet(String propietario, int maxPosti, int maxVelocita, int numTurbine) {
+	public Jet(Persona propietario, int maxPosti, int maxVelocita, int numTurbine) {
 		super(propietario, maxPosti, maxVelocita);
 		// TODO Auto-generated constructor stub
 		this.numTurbine = numTurbine;

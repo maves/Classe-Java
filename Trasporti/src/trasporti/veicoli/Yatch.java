@@ -1,12 +1,13 @@
 package trasporti.veicoli;
 
+import Persona.Persona;
 import trasporti.TrazioneMotore;
 import trasporti.Veicolo;
 import trasporti.VeicoloAcquatico;
 
 public class Yatch extends Veicolo implements VeicoloAcquatico, TrazioneMotore {
 
-	public Yatch(String propietario, int maxPosti, int maxVelocita) {
+	public Yatch(Persona propietario, int maxPosti, int maxVelocita) {
 		super(propietario, maxPosti, maxVelocita);
 		// TODO Auto-generated constructor stub
 	}

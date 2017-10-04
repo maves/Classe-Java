@@ -1,11 +1,12 @@
 package trasporti.veicoli;
 
+import Persona.Persona;
 import trasporti.Veicolo;
 import trasporti.VeicoloAereo;
 
 public class Aliante extends Veicolo implements VeicoloAereo{
 
-	public Aliante(String propietario, int maxPosti, int maxVelocita) {
+	public Aliante(Persona propietario, int maxPosti, int maxVelocita) {
 		super(propietario, maxPosti, maxVelocita);
 		// TODO Auto-generated constructor stub
 	}

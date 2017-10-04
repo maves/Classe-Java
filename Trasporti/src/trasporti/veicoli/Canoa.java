@@ -1,12 +1,13 @@
 package trasporti.veicoli;
 
+import Persona.Persona;
 import trasporti.TrazioneAnimale;
 import trasporti.Veicolo;
 import trasporti.VeicoloAcquatico;
 
 public class Canoa extends Veicolo implements VeicoloAcquatico, TrazioneAnimale {
 
-	public Canoa(String propietario, int maxPosti, int maxVelocita) {
+	public Canoa(Persona propietario, int maxPosti, int maxVelocita) {
 		super(propietario, maxPosti, maxVelocita);
 		// TODO Auto-generated constructor stub
 	}

@@ -1,5 +1,7 @@
 package trasporti.veicoli;
 
+import Persona.Persona;
+import trasporti.Documentazione;
 import trasporti.TrazioneAnimale;
 import trasporti.Veicolo;
 import trasporti.VeicoloTerrestre;
@@ -8,13 +10,18 @@ public class Carrozza extends Veicolo implements VeicoloTerrestre, TrazioneAnima
 
 	private int numCavalli;
 	
-	public Carrozza(String propietario, int numCavalli, int maxPosti, int maxVelocita) {
+	public Carrozza(Persona propietario, int numCavalli, int maxPosti, int maxVelocita) {
 		super(propietario, maxPosti, maxVelocita);
 		// TODO Auto-generated constructor stub
 		this.numCavalli = numCavalli;
 	}
 	
-	protected int getNumCavalli() {
+	public Carrozza(Persona propietario, int numCavalli, int maxPosti, int maxVelocita, Documentazione docCarro) {
+		super(propietario, maxPosti, maxVelocita, docCarro);
+		this.numCavalli = numCavalli;
+	}
+
+	public int getNumCavalli() {
 		return numCavalli;
 	}
 
