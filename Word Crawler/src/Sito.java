@@ -10,8 +10,16 @@ public class Sito {
 	String url = "";
 	
 	public Sito(String url) {
-		this.url = url;
+		this.url = url;	
 		
+		indirizzi.put(url, false);
+	}
+	
+	public void start() {
+		
+		while(true) {
+			
+		}
 	}
 	
 	
