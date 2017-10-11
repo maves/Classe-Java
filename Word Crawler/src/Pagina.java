@@ -80,9 +80,32 @@ public class Pagina {   //hdchdhdhddhdhh
     }
     
 	
-	private String pulisci(String s) {
-		return s;
+    public static String pulisci(String s) {
+		/*boolean contieneChiocciola;
+		for (int i = 0; i < s.length(); i++) {
+			if (s.charAt(i)=='@') {
+				contieneChiocciola = true;
+			}
+		}*/
+		//vocali.contains(lettera)
+
+		String risultato = "";
+		for (int i = 0; i < s.length(); i++) {
+			if (((s.charAt(i) >= 48 ) && (s.charAt(i) <= 57))  || 	//numeri
+				((s.charAt(i) >= 65) && (s.charAt(i) <= 90))   ||  	//lettere maiuscole
+				((s.charAt(i) >= 97) && (s.charAt(i) <= 122))  ||   //lettere minuscole
+				((s.charAt(i) >= 192) && (s.charAt(i) <= 246)) ||	//accentate 1
+				((s.charAt(i) >= 249) && (s.charAt(i) <= 255)) ||	//accentate 2
+				((s.charAt(i) >= 192) && (s.charAt(i) <= 246))) {
+			risultato = risultato  + s.charAt(i);
+			}
+		}
+		if (risultato.equals("")) {
+			return null;
+		}
+		return risultato;
 	}
+
 
 	public String getUrl() {
 		return url;
