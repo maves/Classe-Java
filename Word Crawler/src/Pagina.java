@@ -15,7 +15,7 @@ public class Pagina {   //DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 	Document doc;
 	
 	public Pagina(String url) {
-		// ciao marzio
+		// ma come funzuioni?
 		this.url = url;
 
 		try {
