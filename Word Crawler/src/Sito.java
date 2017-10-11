@@ -1,12 +1,14 @@
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
 public class Sito {
 
-	Map<String, Integer> parole = new HashMap<String, Integer>();
-	Map<String, Boolean> indirizzi = new HashMap<String, Boolean>();
+	public Map<String, Integer> parole = new HashMap<String, Integer>();
+	// indirizzi puliti da analizzare
+	Map<String, Boolean> indirizzi = new LinkedHashMap<String, Boolean>();
 	Map<String, Boolean> blackListIndirizzi = new HashMap<String, Boolean>();
 
 	String url = "";
@@ -15,15 +17,15 @@ public class Sito {
 	public Sito() {
 		this.url = url;
 
-//		indirizzi.put(url, false);
+		indirizzi.put(url, false);
+	}	
 		
-		
-		indirizzi.put("c", false);
-		indirizzi.put("ca", false);
-		indirizzi.put("xxxx", true);
-		indirizzi.put("caba", false);
-		indirizzi.put("cabab", false);
-	}
+//		indirizzi.put("ca", false);
+//		indirizzi.put("cas", true);
+//		indirizzi.put("xxxx", true);
+//		indirizzi.put("caba", false);
+//		indirizzi.put("cabab", false);
+
 
 	public void start() {
 
@@ -34,19 +36,52 @@ public class Sito {
 			Entry e = i.next();
 			String  key =   (String) e.getKey();
 			boolean val =   (boolean) e.getValue();
-			
-			
-			
 			System.out.println(key + " " + val);
 			
+			// se true già analizzata
+			if(val == true) continue;
 			
-//			String key = i.next().getKey();
-//			i.next()
-//			System.out.println(key + " " + indirizzi.get(key));
+			// Inizializzo pagina
+			Pagina pagina = new Pagina(key);
+			// prendo risultati pagina
+			Map<String, Integer> m = pagina.getStatistiche();
+			// aggiungo risultati
+			m.forEach((k, v) -> parole.merge(k, v, (v1, v2) -> v1 + v2));
+			// prendo link
+			String[] links = pagina.getLinks();
 			
 			
+			// da rivedere logica dialogo con pagina e blacklist
+			// mmmm no! Pagina mi da tutti i links del dominio e qui controllo
+			// 1 - Doppioni
+			// 2 - Blacklist
+			// 3 - Header			
 			
-		}
+			
+			// verifico e aggiungo link a indirizzi
+			for(String link: links) {
+				// verifico doppioni
+				if(indirizzi.containsKey(link))
+					continue;
+				// verifico se dentro blacklist
+				if(blackListIndirizzi.containsKey(link))
+					continue;
+				// verifica header
+				if(this.isHtml(link)) {
+					// aggiungo a indirizzi
+					this.indirizzi.put(link, false);
+				}
+			}
+			
+		} // end while
+		
+	
+	} // end start
+	
+	private boolean isHtml(String link) {
+		// qui lavoro Ferji
+		
+		return true;
 	}
 
 }
