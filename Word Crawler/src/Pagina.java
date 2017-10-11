@@ -16,6 +16,7 @@ public class Pagina {   //hdchdhdhddhdhh
 	
 	public Pagina(String url) {
 		// ciao gghhghhghh
+		////
 		this.url = url;
 
 		try {
