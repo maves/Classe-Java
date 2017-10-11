@@ -60,7 +60,7 @@ public class Pagina {
         }
 		
 		String[] out = new String[res.size()];
-		return out;
+		return res.toArray(out);
 		
 	}
 	

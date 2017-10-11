@@ -29,10 +29,14 @@ public class testPagina {
 //		Iterator<Entry<String, Integer>> i = m.entrySet().iterator(); 
 //		while(i.hasNext()){
 //		    String key = i.next().getKey();
-//		    System.out.println(key+", "+m.get(key));
+//		    System.out.println(key+" "+m.get(key));
 //		}
 		
-		pagina.getLinks();
+		String[] links = pagina.getLinks();
+		
+		for(String s: links) {
+			System.out.println(s);
+		}
 
 	}
 
