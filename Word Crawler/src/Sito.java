@@ -80,8 +80,11 @@ public class Sito {
 	
 	private boolean isHtml(String link) {
 		// qui lavoro Ferji
+		boolean c=false;
+		if (link.contains("text/html"))
+			c=true;
 		
-		return true;
+		return c;
 	}
 
 }
