@@ -89,7 +89,8 @@ public class Pagina {   //hdchdhdhddhdhh
 		}*/
 		//vocali.contains(lettera)
 
-		String risultato = "";
+		StringBuffer risultato = new StringBuffer();
+		
 		for (int i = 0; i < s.length(); i++) {
 			if (((s.charAt(i) >= 48 ) && (s.charAt(i) <= 57))  || 	//numeri
 				((s.charAt(i) >= 65) && (s.charAt(i) <= 90))   ||  	//lettere maiuscole
@@ -97,13 +98,13 @@ public class Pagina {   //hdchdhdhddhdhh
 				((s.charAt(i) >= 192) && (s.charAt(i) <= 246)) ||	//accentate 1
 				((s.charAt(i) >= 249) && (s.charAt(i) <= 255)) ||	//accentate 2
 				((s.charAt(i) >= 192) && (s.charAt(i) <= 246))) {
-			risultato = risultato  + s.charAt(i);
+				risultato.append(s.charAt(i));
+			}else {
+				risultato.append(" ");
 			}
+			
 		}
-		if (risultato.equals("")) {
-			return null;
-		}
-		return risultato;
+		return risultato.toString();
 	}
 
 
