@@ -8,7 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class Pagina {   //DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+public class Pagina {   //hdchdhdhddhdhh
 	
 	private String url = "";
 	private String contenuto = "";
