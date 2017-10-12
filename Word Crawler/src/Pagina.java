@@ -83,32 +83,31 @@ public class Pagina {   //hdchdhdhddhdhh
     public static String pulisci(String s) {
     	
     	
-		/*boolean contieneChiocciola;
-		for (int i = 0; i < s.length(); i++) {
-			if (s.charAt(i)=='@') {
-				contieneChiocciola = true;
-			}
-		}*/
-		//vocali.contains(lettera)
+  		/*boolean contieneChiocciola;
+  		for (int i = 0; i < s.length(); i++) {
+  			if (s.charAt(i)=='@') {
+  				contieneChiocciola = true;
+  			}
+  		}*/
+  		//vocali.contains(lettera)
 
-		StringBuffer risultato = new StringBuffer();
-		
-		for (int i = 0; i < s.length(); i++) {
-			if (((s.charAt(i) >= 48 ) && (s.charAt(i) <= 57))  || 	//numeri
-				((s.charAt(i) >= 65) && (s.charAt(i) <= 90))   ||  	//lettere maiuscole
-				((s.charAt(i) >= 97) && (s.charAt(i) <= 122))  ||   //lettere minuscole
-				((s.charAt(i) >= 192) && (s.charAt(i) <= 246)) ||	//accentate 1
-				((s.charAt(i) >= 249) && (s.charAt(i) <= 255)) ||	//accentate 2
-				((s.charAt(i) >= 192) && (s.charAt(i) <= 246))) {
-				risultato.append(s.charAt(i));
-			}else {
-				risultato.append(" ");
-			}
-			
-		}
-		return risultato.toString();
-	}
-
+  		StringBuffer risultato = new StringBuffer();
+  		
+  		for (int i = 0; i < s.length(); i++) {
+  			if (((s.charAt(i) >= 48 ) && (s.charAt(i) <= 57))  || 	//numeri
+  				((s.charAt(i) >= 65) && (s.charAt(i) <= 90))   ||  	//lettere maiuscole
+  				((s.charAt(i) >= 97) && (s.charAt(i) <= 122))  ||   //lettere minuscole
+  				((s.charAt(i) >= 192) && (s.charAt(i) <= 246)) ||	//accentate 1
+  				((s.charAt(i) >= 249) && (s.charAt(i) <= 255)) ||	//accentate 2
+  				((s.charAt(i) >= 192) && (s.charAt(i) <= 246))) {
+  				risultato.append(s.charAt(i));
+  			}else {
+  				risultato.append(" ");
+  			}
+  			
+  		}
+  		return risultato.toString();
+  	}
 
 	public String getUrl() {
 		return url;
