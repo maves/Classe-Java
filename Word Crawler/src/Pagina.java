@@ -10,6 +10,7 @@ import org.jsoup.select.Elements;
 
 public class Pagina {   //hdchdhdhddhdhh
 	
+	private String urlDominio = "";
 	private String url = "";
 	private String contenuto = "";
 	Document doc;
@@ -17,6 +18,8 @@ public class Pagina {   //hdchdhdhddhdhh
 	public Pagina(String url) {
 		// ciao gghhghhghh
 		this.url = url;
+		setUrlDominio(url);
+		
 
 		try {
 			this.doc = Jsoup.connect(url).get();
@@ -65,6 +68,10 @@ public class Pagina {   //hdchdhdhddhdhh
 	}
 	
 	private String pulisciLink(String s) {
+	//controllo, se supera il controllo ritorna la stringa altrimenti
+		//null
+		
+		
 		return s;
 	}
 	
@@ -98,8 +105,7 @@ public class Pagina {   //hdchdhdhddhdhh
   				((s.charAt(i) >= 65) && (s.charAt(i) <= 90))   ||  	//lettere maiuscole
   				((s.charAt(i) >= 97) && (s.charAt(i) <= 122))  ||   //lettere minuscole
   				((s.charAt(i) >= 192) && (s.charAt(i) <= 246)) ||	//accentate 1
-  				((s.charAt(i) >= 249) && (s.charAt(i) <= 255)) ||	//accentate 2
-  				((s.charAt(i) >= 192) && (s.charAt(i) <= 246))) {
+  				((s.charAt(i) >= 249) && (s.charAt(i) <= 255))) {	//accentate 2
   				risultato.append(s.charAt(i));
   			}else {
   				risultato.append(" ");
@@ -121,4 +127,30 @@ public class Pagina {   //hdchdhdhddhdhh
 		return getContenuto();
 	}
 	
+	public void setUrlDominio(String url) {
+		String http = "http://";
+		int numSlash = 0;
+		String urlRitorno = url;
+		for (int i = 0; i < http.length(); i++) {
+			if (!(http.charAt(i)==url.charAt(i))) {
+				urlRitorno = http + url;
+				break;
+			}
+		}
+		for (int i = 0; i < urlRitorno.length(); i++) {
+			if(urlRitorno.charAt(i)=='/') {
+				numSlash++;
+			}
+			
+			if (numSlash == 3) {
+				urlRitorno = urlRitorno.substring(0, i);
+				break;
+			}
+		}		
+		
+		urlRitorno = urlRitorno + '/';
+		
+		this.urlDominio = urlRitorno;
+	}
+
 }
