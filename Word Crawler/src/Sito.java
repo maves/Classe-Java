@@ -16,8 +16,8 @@ public class Sito {
 
 	String url = "";
 
-//	public Sito(String url) {
-	public Sito() {
+	public Sito(String url) {
+//	public Sito() {
 		this.url = url;
 		
 
