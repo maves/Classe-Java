@@ -1,3 +1,6 @@
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -81,8 +84,21 @@ public class Sito {
 	
 	private boolean isHtml(String link) {
 		// qui lavoro Ferji
-		
-		return true;
+		boolean c=false;
+		try {
+			
+			URL u = new URL(link);
+			URLConnection uc = u.openConnection();
+			uc.connect();
+			
+			String restituito = uc.getContentType().toString();
+			if (restituito.contains("text/html"))
+				c=true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return c;
 	}
 
 }
