@@ -69,7 +69,7 @@ public class Pagina {   //hdchdhdhddhdhh
 	
 	private String pulisciLink(String s) {
 	//controllo, se supera il controllo ritorna la stringa altrimenti
-		//null
+		//null/
 		
 		
 		return s;
