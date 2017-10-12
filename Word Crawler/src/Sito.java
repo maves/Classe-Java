@@ -3,7 +3,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
+//https://www.youtube.com/watch?v=ZK20jVt7XEc
 public class Sito {
 
 	public Map<String, Integer> parole = new HashMap<String, Integer>();
@@ -16,6 +16,7 @@ public class Sito {
 //	public Sito(String url) {
 	public Sito() {
 		this.url = url;
+		
 
 		indirizzi.put(url, false);
 	}	
