@@ -1,6 +1,7 @@
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -12,7 +13,8 @@ public class Sito {
 	public Map<String, Integer> parole = new HashMap<String, Integer>();
 	// indirizzi puliti da analizzare
 	Map<String, Boolean> indirizzi = new LinkedHashMap<String, Boolean>();
-	Map<String, Boolean> blackListIndirizzi = new HashMap<String, Boolean>();
+
+	ArrayList<String> blackListIndirizzi = new ArrayList<String>();
 
 	String url = "";
 
@@ -68,7 +70,7 @@ public class Sito {
 				if(indirizzi.containsKey(link))
 					continue;
 				// verifico se dentro blacklist
-				if(blackListIndirizzi.containsKey(link))
+				if(blackListIndirizzi.contains(link))
 					continue;
 				// verifica header
 				if(this.isHtml(link)) {
@@ -98,6 +100,11 @@ public class Sito {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		// se non è html inserisco dominio in blackListIndirizzi
+		blackListIndirizzi.add(link);
+		
+		
+		
 		return c;
 	}
 
