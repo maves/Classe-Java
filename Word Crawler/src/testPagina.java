@@ -16,6 +16,7 @@ public class testPagina {
 		
 //		url = "https://it.wikipedia.org/wiki/Speciale:PaginaCasuale";
 		url = "http://www.pmichaud.com/toast/";
+		url = "http://www.pmichaud.com";
 		
 		Pagina pagina = new Pagina(url);
 		

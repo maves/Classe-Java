@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,7 +19,7 @@ public class Pagina {   //hdchdhdhddhdhh
 	public Pagina(String url) {
 		// ciao gghhghhghh
 		this.url = url;
-		setUrlDominio(url);
+		
 		
 
 		try {
@@ -26,7 +27,11 @@ public class Pagina {   //hdchdhdhddhdhh
 //			this.contenuto = doc.toString();
 			this.contenuto = this.pulisci(doc.text());
 			
-		} catch (IOException e) {
+		}catch(HttpStatusException e) {
+			
+			System.out.println("Errore 404: salto pagina..");
+			
+		}catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -40,6 +45,7 @@ public class Pagina {   //hdchdhdhddhdhh
 		Map<String, Integer> res = new HashMap<String, Integer>();
 		
 		for(String s: arr) {
+			if(s=="") continue;
 			Integer occorrenze = res.get(s);
 			res.put(s, (occorrenze == null) ? 1 : ++occorrenze );
 		}		
@@ -49,7 +55,14 @@ public class Pagina {   //hdchdhdhddhdhh
 	
 	public String[] getLinks() {
 		
-		Elements links = doc.select("a[href]");
+		Elements links = null;
+		try{
+			links = doc.select("a[href]");
+		}catch(NullPointerException e) {
+			System.out.println("Bug Jsoup !!!!!");
+			String[] vuoto = new String[0];
+			return vuoto;
+		}
 		
 		ArrayList<String> res = new ArrayList<String>();
 		
@@ -70,6 +83,7 @@ public class Pagina {   //hdchdhdhddhdhh
 	private String pulisciLink(String s) {
 	//controllo, se supera il controllo ritorna la stringa altrimenti
 		//null//
+		// non serve più perchè ci pensa già classe ricercatore
 		
 		
 		return s;
@@ -87,7 +101,7 @@ public class Pagina {   //hdchdhdhddhdhh
     }
     
 	
-    public static String pulisci(String s) {
+    public String pulisci(String s) {
     	
     	
   		/*boolean contieneChiocciola;
@@ -127,30 +141,6 @@ public class Pagina {   //hdchdhdhddhdhh
 		return getContenuto();
 	}
 	
-	public void setUrlDominio(String url) {
-		String http = "http://";
-		int numSlash = 0;
-		String urlRitorno = url;
-		for (int i = 0; i < http.length(); i++) {
-			if (!(http.charAt(i)==url.charAt(i))) {
-				urlRitorno = http + url;
-				break;
-			}
-		}
-		for (int i = 0; i < urlRitorno.length(); i++) {
-			if(urlRitorno.charAt(i)=='/') {
-				numSlash++;
-			}
-			
-			if (numSlash == 3) {
-				urlRitorno = urlRitorno.substring(0, i);
-				break;
-			}
-		}		
-		
-		urlRitorno = urlRitorno + '/';
-		
-		this.urlDominio = urlRitorno;
-	}
+	
 
 }
