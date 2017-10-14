@@ -88,7 +88,7 @@ public class Ricercatore {
 			for (String link : links) {
 
 				// verifico dominio
-				if (!stessoDominio(link)) {
+				if (!isStessoDominio(link)) {
 					linkScartati++;
 					continue;
 				}
@@ -187,7 +187,7 @@ public class Ricercatore {
 		return urlRitorno;
 	}
 
-	public boolean stessoDominio(String url) {
+	public boolean isStessoDominio(String url) {
 
 //		System.out.println(url);
 		boolean res;
