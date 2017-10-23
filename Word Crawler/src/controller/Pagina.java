@@ -1,3 +1,4 @@
+package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,25 +18,17 @@ public class Pagina {   //hdchdhdhddhdhh
 	Document doc;
 	
 	public Pagina(String url) {
-		// ciao gghhghhghh
 		this.url = url;
-		
-		
-
 		try {
 			this.doc = Jsoup.connect(url).get();
 //			this.contenuto = doc.toString();
 			this.contenuto = this.pulisci(doc.text());
 			
-		}catch(HttpStatusException e) {
-			
-			System.out.println("Errore 404: salto pagina..");
-			
+		}catch(HttpStatusException e) {			
+			System.out.println("Errore 404: salto pagina..");			
 		}catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public Map<String, Integer> getStatistiche() {

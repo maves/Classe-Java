@@ -1,3 +1,5 @@
+package controller;
+import model.GestoreDB;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -19,10 +21,12 @@ public class Ricercatore {
 
 	String url = "";
 	String dominio = "";
+	GestoreDB gestoreDb;
 
-	public Ricercatore(String url) {
+	public Ricercatore(String url, GestoreDB gdb) {
 		// public Sito() {
 		this.url = url;
+		this.gestoreDb = gdb;
 		this.dominio = formattaDominio(url);
 
 		indirizzi.put(url, false);
@@ -65,6 +69,10 @@ public class Ricercatore {
 			Pagina pagina = new Pagina(key);
 			// prendo risultati pagina
 			Map<String, Integer> m = pagina.getStatistiche();
+			
+//			PageResponse pr = new PageResponse(key, m);
+			
+			gestoreDb.salvaUrl(key);
 			// aggiungo risultati
 			m.forEach((k, v) -> parole.merge(k, v, (v1, v2) -> v1 + v2));
 			System.out.println("Parole trovate: " + m.size());
