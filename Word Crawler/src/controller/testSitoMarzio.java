@@ -14,9 +14,8 @@ public class testSitoMarzio {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		Ricercatore s = new Ricercatore("http://www.pmichaud.com/");
-		GestoreDB gdb = new GestoreDB();
 		
-		Ricercatore s = new Ricercatore("http://www.armoniaolistica.it/", gdb);
+		Ricercatore s = new Ricercatore("http://www.armoniaolistica.it/");
 		s.start();
 		
 		System.out.println("------------ PAROLE ------------");		

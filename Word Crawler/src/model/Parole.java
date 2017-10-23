@@ -19,6 +19,8 @@ public class Parole implements Serializable {
 
 	private String parola;
 
+	private int occorrenze;	
+	
 	//bi-directional many-to-many association to Url
 	@ManyToMany
 	@JoinTable(
@@ -34,7 +36,11 @@ public class Parole implements Serializable {
 
 	public Parole() {
 	}
-
+	
+	public Parole(String par, int occ) {
+		setParola(par);
+		setOccorrenze(occ);
+	}
 	public int getId() {
 		return this.id;
 	}
@@ -57,6 +63,14 @@ public class Parole implements Serializable {
 
 	public void setUrls(List<Url> urls) {
 		this.urls = urls;
+	}
+
+	public int getOccorrenze() {
+		return occorrenze;
+	}
+
+	public void setOccorrenze(int occorrenze) {
+		this.occorrenze = occorrenze;
 	}
 
 }

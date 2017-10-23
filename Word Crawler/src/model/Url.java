@@ -2,7 +2,11 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 
 /**
@@ -27,10 +31,26 @@ public class Url implements Serializable {
 	//bi-directional many-to-many association to Parole
 	@ManyToMany(mappedBy="urls")
 	private List<Parole> paroles;
-
+	
 	public Url() {
 	}
-
+	
+	public Url(String url) {
+		setUrl(url);		
+	}
+	
+	public void salvaParole(Map<String, Integer> m) {
+		Iterator<Entry<String, Integer>> i = m.entrySet().iterator();
+		while (i.hasNext()) {
+			Entry<String, Integer> e = i.next();
+			String key = (String) e.getKey();
+			Integer val = (Integer) e.getValue();
+			Parole p = new Parole(key, val);
+			this.paroles.add(p);
+		}
+		
+	}
+	
 	public int getId() {
 		return this.id;
 	}

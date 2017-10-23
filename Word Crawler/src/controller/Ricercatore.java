@@ -1,5 +1,7 @@
 package controller;
 import model.GestoreDB;
+import model.Url;
+import model.Domini;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -20,16 +22,21 @@ public class Ricercatore {
 	ArrayList<String> blackListIndirizzi = new ArrayList<String>();
 
 	String url = "";
-	String dominio = "";
+//	String dominio = "";
 	GestoreDB gestoreDb;
-
-	public Ricercatore(String url, GestoreDB gdb) {
+	Domini d;
+	
+	public Ricercatore(String url) {
 		// public Sito() {
+		
 		this.url = url;
-		this.gestoreDb = gdb;
-		this.dominio = formattaDominio(url);
-
+		
+		//this.dominio = formattaDominio(url);
+		this.d = new Domini(formattaDominio(url));
 		indirizzi.put(url, false);
+		 
+		this.gestoreDb = GestoreDB.getIstance();
+		
 	}
 
 	// indirizzi.put("ca", false);
@@ -60,9 +67,11 @@ public class Ricercatore {
 			boolean val = (boolean) e.getValue();
 
 			// se true già analizzata
-			if (val == true)
-				continue;
-
+			if (val == true) continue;
+				
+			
+			String url = key;
+			
 			System.out.println("--- Sto per analizzare " + key);
 
 			// Inizializzo pagina
@@ -70,9 +79,14 @@ public class Ricercatore {
 			// prendo risultati pagina
 			Map<String, Integer> m = pagina.getStatistiche();
 			
-//			PageResponse pr = new PageResponse(key, m);
+			Url u = new Url(url);
+			u.salvaParole(m);
+			this.d.addUrl(u);
 			
-			gestoreDb.salvaUrl(key);
+			
+			gestoreDb.salvaDominio(d);
+			
+			
 			// aggiungo risultati
 			m.forEach((k, v) -> parole.merge(k, v, (v1, v2) -> v1 + v2));
 			System.out.println("Parole trovate: " + m.size());
@@ -199,6 +213,7 @@ public class Ricercatore {
 
 //		System.out.println(url);
 		boolean res;
+		String dominio = d.getDominio();
 		if (url.length() < dominio.length()) {
 			res = false;
 		} else {

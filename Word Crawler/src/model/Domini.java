@@ -24,6 +24,11 @@ public class Domini implements Serializable {
 	private List<Url> urls;
 
 	public Domini() {
+		
+	}
+	
+	public Domini(String dominio) {
+		setDominio(dominio);
 	}
 
 	public int getId() {
